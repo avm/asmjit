@@ -752,6 +752,11 @@ public:
     return cc->add_invoke_node(out, inst_id, o0, signature);
   }
 
+  //! Invoke a function call without `target` type enforcement.
+  ASMJIT_INLINE Error invoke(Out<InvokeNode*> out, const Operand_& target, const FuncSignature& signature) {
+    return cc->invoke_(out, target, signature);
+  }
+
   //! \}
 
   //! \name Virtual Registers & Memory (Target Independent)

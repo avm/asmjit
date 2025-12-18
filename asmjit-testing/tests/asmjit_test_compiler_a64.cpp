@@ -416,15 +416,12 @@ public:
     a64::Gp x = cc.new_gp32("x");
     a64::Gp y = cc.new_gp32("y");
     a64::Gp r = cc.new_gp32("r");
-    a64::Gp fn = cc.new_gp_ptr("fn");
 
     func_node->set_arg(0, x);
     func_node->set_arg(1, y);
 
-    cc.mov(fn, (uint64_t)called_fn);
-
     InvokeNode* invoke_node;
-    cc.invoke(Out(invoke_node), fn, FuncSignature::build<uint32_t, uint32_t, uint32_t>());
+    cc.invoke(Out(invoke_node), Imm(called_fn), FuncSignature::build<uint32_t, uint32_t, uint32_t>());
     invoke_node->set_arg(0, x);
     invoke_node->set_arg(1, y);
     invoke_node->set_ret(0, r);
